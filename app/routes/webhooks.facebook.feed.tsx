@@ -18,6 +18,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export async function action({ request }: ActionFunctionArgs) {
     const json = await request.json();
 
+    console.log('Received Facebook webhook:', JSON.stringify(json));
+
     // TODO: REMOVE THIS AFTER MAJA
     const majaEntries = json.entry.filter((entry: any) => entry.id == '103299868047739');
     const freshsportEntries = json.entry.filter((entry: any) => entry.id == '1454510698173110');
