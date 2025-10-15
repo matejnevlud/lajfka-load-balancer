@@ -24,6 +24,8 @@ export async function action({ request }: ActionFunctionArgs) {
     const majaEntries = json.entry.filter((entry: any) => entry.id == '103299868047739');
     const freshsportEntries = json.entry.filter((entry: any) => entry.id == '1454510698173110');
     const perlaEntries = json.entry.filter((entry: any) => entry.id == '543848708808973');
+    const ivetEntries = json.entry.filter((entry: any) => entry.id == '105610008984274');
+
 
 
     if (majaEntries.length > 0) {
@@ -67,6 +69,20 @@ export async function action({ request }: ActionFunctionArgs) {
             body: JSON.stringify(perlaJson),
         }).catch((error) => {
             console.log('Error forwarding request to Perla Mozambiku:', error);
+        });
+    }
+
+    if (ivetEntries.length > 0) {
+        const ivetJson = json;
+        ivetJson.entry = ivetEntries;
+        fetch('https://lajfka-ivetstyl-production.up.railway.app/webhooks/facebook/feed', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(ivetJson),
+        }).catch((error) => {
+            console.log('Error forwarding request to Ivet:', error);
         });
     }
 
