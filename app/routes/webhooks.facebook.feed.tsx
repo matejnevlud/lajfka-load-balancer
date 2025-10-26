@@ -42,6 +42,16 @@ export async function action({ request }: ActionFunctionArgs) {
         }).catch((error) => {
             console.log('Error forwarding request to maja:', error);
         });
+
+        fetch('https://lajfka-majinshop-production.up.railway.app/webhooks/facebook/feed', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(majaJson),
+        }).catch((error) => {
+            console.log('Error forwarding request to Majinshop:', error);
+        });
     }
 
     if (freshsportEntries.length > 0) {
